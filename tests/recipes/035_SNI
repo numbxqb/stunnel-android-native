@@ -1,0 +1,42 @@
+#!/bin/sh
+. $(dirname $0)/../test_library
+
+start() {
+  ../../src/stunnel -fd 0 <<EOT
+  debug = debug
+  syslog = no
+  pid = ${result_path}/stunnel.pid
+  output = ${result_path}/stunnel.log
+
+  [client]
+  client = yes
+  accept = 127.0.0.1:${http1}
+  connect = 127.0.0.1:${https1}
+  sni = sni.mydomain.com
+  cert = ../certs/client_cert.pem
+
+  [server_virtual]
+  accept = 127.0.0.1:${https1}
+  cert =  ../certs/server_cert.pem
+  exec = ${script_path}/execute
+  execArgs = execute 035_SNI_error
+
+  [sni]
+  sni = server_virtual:*.mydomain.com
+  cert = ../certs/server_cert.pem
+  exec = ${script_path}/execute
+  execArgs = execute 035_SNI
+  verifyPeer = yes
+  CAfile = ../certs/PeerCerts.pem
+EOT
+}
+
+if grep -q "OpenSSL 1" "results.log"
+  then
+    test_log_for "035_SNI" "execute" "0" "$1" "$2" "$3" 2>> "stderr.log"
+    exit $?
+  else
+    exit_logs "035_SNI" "skipped"
+    clean_logs
+    exit 125
+  fi

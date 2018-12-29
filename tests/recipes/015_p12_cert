@@ -1,0 +1,31 @@
+#!/bin/sh
+. $(dirname $0)/../test_library
+
+start() {
+  ../../src/stunnel -fd 0 <<EOT
+  debug = debug
+  syslog = no
+  pid = ${result_path}/stunnel.pid
+  output = ${result_path}/stunnel.log
+
+  [client]
+  client = yes
+  accept = 127.0.0.1:${http1}
+  connect = 127.0.0.1:${https1}
+
+  [server]
+  accept = 127.0.0.1:${https1}
+  connect = 127.0.0.1:${http_nc}
+  cert = ../certs/server_cert.p12
+EOT
+}
+
+if grep -q "OpenSSL 1" "results.log"
+  then
+    test_log_for "015_p12_cert" "success" "0" "$1" "$2" "$3" 2>> "stderr.log"
+    exit $?
+  else
+    exit_logs "015_p12_cert" "skipped"
+    clean_logs
+    exit 125
+  fi

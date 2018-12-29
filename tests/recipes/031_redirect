@@ -1,0 +1,52 @@
+#!/bin/sh
+. $(dirname $0)/../test_library
+
+start() {
+  ../../src/stunnel -fd 0 <<EOT
+  debug = debug
+  syslog = no
+  pid = ${result_path}/stunnel.pid
+  output = ${result_path}/stunnel.log
+
+  [client_1]
+  client = yes
+  accept = 127.0.0.1:${http1}
+  connect = 127.0.0.1:${https1}
+  ;cert = ../certs/client_cert.pem
+;wrong certificate
+  cert = ../certs/stunnel.pem
+
+  [client_2]
+  client = yes
+  accept = 127.0.0.1:${http2}
+  connect = 127.0.0.1:${https2}
+
+  [client_3]
+  client = yes
+  accept = 127.0.0.1:${http3}
+  connect = 127.0.0.1:${https3}
+
+  [server_1]
+  accept = 127.0.0.1:${https1}
+  connect = 127.0.0.1:${http2}
+  redirect = ${http3}
+  cert = ../certs/server_cert.pem
+  verifyPeer = yes
+  CAfile = ../certs/PeerCerts.pem
+
+  [server_2]
+  accept = 127.0.0.1:${https2}
+  cert = ../certs/server_cert.pem
+  exec = ${script_path}/execute
+  execArgs = execute 031_redirect_error
+
+  [server_3]
+  accept = 127.0.0.1:${https3}
+  cert = ../certs/server_cert.pem
+  exec = ${script_path}/execute
+  execArgs = execute 031_redirect
+EOT
+}
+
+test_log_for "031_redirect" "execute" "0" "$1" "$2" "$3" 2>> "stderr.log"
+exit $?

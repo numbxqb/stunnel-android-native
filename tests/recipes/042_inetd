@@ -1,0 +1,31 @@
+#!/bin/sh
+. $(dirname $0)/../test_library
+
+start() {
+  ../../src/stunnel -fd 0 <<EOT
+  debug = debug
+  syslog = no
+  pid = ${result_path}/stunnel.pid
+  output = ${result_path}/stunnel.log
+
+  [server]
+  accept = 127.0.0.1:${https1}
+  exec = ${script_path}/execute
+  execArgs = execute 042_inetd
+  cert = ../certs/server_cert.pem
+EOT
+}
+
+start_inetd() {
+  ../../src/stunnel -fd 9 9<<EOT
+  debug = debug
+  syslog = no
+  output = ${result_path}/stunnel_0.log
+  service = inetd client
+  client = yes
+  connect = 127.0.0.1:${https1}
+EOT
+}
+
+test_log_for "042_inetd" "exe_con" "0" "$1" "$2" "$3" 2>> "stderr.log"
+exit $?

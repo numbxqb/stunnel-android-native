@@ -1,0 +1,27 @@
+#!/bin/sh
+. $(dirname $0)/../test_library
+
+start() {
+  ../../src/stunnel -fd 0 <<EOT
+  debug = debug
+  syslog = no
+  pid = ${result_path}/stunnel.pid
+  output = ${result_path}/stunnel.log
+
+  [client]
+  client = yes
+  accept = 127.0.0.1:${http1}
+  connect = 127.0.0.1:${https1}
+  cert = ../certs/client_cert.pem
+
+  [server]
+  accept = 127.0.0.1:${https1}
+  connect = 127.0.0.1:${http_nc}
+  cert = ../certs/server_cert.pem
+  verifyPeer = yes
+  CAfile = ../certs/PeerCerts.pem
+EOT
+}
+
+test_log_for "011_verify_peer" "success" "0" "$1" "$2" "$3" 2>> "stderr.log"
+exit $?
