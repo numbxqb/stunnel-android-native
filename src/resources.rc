@@ -16,10 +16,10 @@ BEGIN
         BLOCK "040904E4"
         BEGIN
             VALUE "CompanyName",        "zhongchunzhineng"
-            VALUE "FileDescription",    "zcproxy - TLS加密代理"
+            VALUE "FileDescription",    "zcproxy - TLS proxy"
             VALUE "FileVersion",        "1.0"
             VALUE "InternalName",       "zcproxy"
-            VALUE "LegalCopyright",     "� by zhongchunzhineng, 2018-2019"
+            VALUE "LegalCopyright",     "© by zhongchunzhineng, 2018-2019"
             VALUE "OriginalFilename",   "zcproxy.exe"
             VALUE "ProductName",        "zcproxy"
             VALUE "ProductVersion",     "1.0"
