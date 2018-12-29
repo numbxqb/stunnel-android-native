@@ -1,5 +1,5 @@
 ## mingw/mingw64 Makefile
-# by Michal Trojnara 1998-2018
+# by zhongchunzhineng 1998-2018
 
 # 32-bit Windows
 #win32_arch=win32

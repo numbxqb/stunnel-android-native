@@ -1,4 +1,4 @@
-# NSIS stunnel installer by Michal Trojnara 1998-2018
+# NSIS stunnel installer by zhongchunzhineng 1998-2018
 
 !define /ifndef VERSION testing
 !define /ifndef ARCH win32
@@ -11,7 +11,7 @@
 SetCompressor /SOLID LZMA
 Name "stunnel ${VERSION}"
 OutFile "stunnel-${VERSION}-${ARCH}-installer.exe"
-BrandingText "Author: Michal Trojnara"
+BrandingText "Author: zhongchunzhineng"
 
 # MultiUser
 !define MULTIUSER_EXECUTIONLEVEL Highest
@@ -369,7 +369,7 @@ Section "Core Files" sectionCORE
     "stunnel installed for $MultiUser.InstallMode"
   WriteRegStr SHCTX "${REGKEY_UNINST}" "DisplayVersion" "${VERSION}"
   WriteRegStr SHCTX "${REGKEY_UNINST}" "DisplayIcon" "$INSTDIR\bin\stunnel.exe"
-  WriteRegStr SHCTX "${REGKEY_UNINST}" "Publisher" "Michal Trojnara"
+  WriteRegStr SHCTX "${REGKEY_UNINST}" "Publisher" "zhongchunzhineng"
   WriteRegStr SHCTX "${REGKEY_UNINST}" \
     "UninstallString" '"$INSTDIR\uninstall.exe" /$MultiUser.InstallMode'
   WriteRegDWORD SHCTX "${REGKEY_UNINST}" "NoModify" 1

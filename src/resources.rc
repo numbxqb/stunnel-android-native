@@ -15,14 +15,14 @@ BEGIN
     BEGIN
         BLOCK "040904E4"
         BEGIN
-            VALUE "CompanyName",        "Michal Trojnara"
-            VALUE "FileDescription",    "stunnel - TLS offloading and load-balancing proxy"
-            VALUE "FileVersion",        STUNNEL_VERSION
-            VALUE "InternalName",       "stunnel"
-            VALUE "LegalCopyright",     "� by Michal Trojnara, 1998-2018"
-            VALUE "OriginalFilename",   "stunnel.exe"
-            VALUE "ProductName",        STUNNEL_PRODUCTNAME
-            VALUE "ProductVersion",     STUNNEL_VERSION
+            VALUE "CompanyName",        "zhongchunzhineng"
+            VALUE "FileDescription",    "zcproxy - TLS加密代理"
+            VALUE "FileVersion",        "1.0"
+            VALUE "InternalName",       "zcproxy"
+            VALUE "LegalCopyright",     "� by zhongchunzhineng, 2018-2019"
+            VALUE "OriginalFilename",   "zcproxy.exe"
+            VALUE "ProductName",        "zcproxy"
+            VALUE "ProductVersion",     "1.0"
         END
     END
     BLOCK "VarFileInfo"
@@ -102,9 +102,9 @@ CAPTION "About stunnel"
 FONT 8, "MS Sans Serif"
 BEGIN
     ICON            IDI_STUNNEL_MAIN, -1,                        6,  6,  20, 20
-    LTEXT           "stunnel version", -1,                      30,  4,  49,  8
+    LTEXT           "zcproxy version", -1,                      30,  4,  49,  8
     LTEXT           STUNNEL_VERSION, -1,                        79,  4,  57,  8
-    LTEXT           "� by Michal Trojnara, 1998-2018", -1,      30, 12, 106,  8
+    LTEXT           "� by zhongchunzhineng, 1998-2018", -1,      30, 12, 106,  8
     LTEXT           "All Rights Reserved", -1,                  30, 20, 106,  8
     LTEXT           "Licensed under the GNU GPL version 2", -1,  4, 28, 132,  8
     LTEXT           "with a special exception for OpenSSL", -1,  4, 36, 132,  8
