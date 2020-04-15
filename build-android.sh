@@ -29,13 +29,13 @@ cd bin/android
     --build=x86_64-pc-linux-gnu --host=arm-linux-androideabi
 make clean
 make V=1
-cd ../..
-mkdir $DST
-cp bin/android/src/stunnel $DST
+#cd ../..
+#mkdir $DST
+#cp bin/android/src/stunnel $DST
 # arm-linux-androideabi-strip $DST/stunnel $DST/openssl
 # cp /opt/androideabi/sysroot/bin/openssl $DST
 # arm-linux-androideabi-strip $DST/openssl
-zip -r $DST.zip $DST
-rm -rf $DST
+#zip -r $DST.zip $DST
+#rm -rf $DST
 # sha256sum $DST.zip
 # mv $DST.zip ../dist/
