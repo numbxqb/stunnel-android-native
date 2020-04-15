@@ -1,30 +1,13 @@
-stunnel overview
+使用stunnel作为代理服务器，运行在Android平台上的Native服务做HTTPS的请求转发。 
 
-Short description
 
-     The stunnel program is designed to work as an SSL encryption
-     wrapper between remote client and local (inetd-startable) or
-     remote servers. The goal is to facilitate SSL encryption and
-     authentication for non-SSL-aware programs.
+编译配置说明：
 
-     stunnel can be used to add  SSL  functionality  to  commonly
-     used  inetd  daemons  like  POP-2,  POP-3  and  IMAP servers
-     without any changes in the programs' code.
+修改build-android.sh文件，设置ANDROID_NDK的路径，如/XXX/XXX/android-ndk-r13b，这样编译时就会使用arm-linux-androideabi-gcc。
+--prefix=/data/local/tmp，本地服务stunnel的配置文件和证书等会在该路径下去搜索，如果涉及到OTA升级，可以根据需求去更改路径。
+运行之前需要将stunnel.pem和修改配置文件stunnel.conf放到prefix路径下，同时还有certs文件夹里的文件。
 
-Compile instructions
 
-     See INSTALL file.
-
-License
-
-     See COPYING file.
-
-Other files you should read
-
-     Changelog      What I did
-     TODO           What I'm going to do
-
-Reporting problems and other contacts
-
-     See FAQ file.
+同时需要OpenSSL的相关库，需要提前编译并放在system/lib或lib64中。
+64位系统支持32位的服务，但该32位的服务和使用动态库必须都是32位的。
 
